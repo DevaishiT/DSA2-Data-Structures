@@ -27,12 +27,39 @@ public:
     }
   }
 
+  void in_order_recursive(vector<int> &result, int ind)
+  {
+    if (ind == -1) return;
+    in_order_recursive(result, left[ind]);
+    result.push_back(key[ind]);
+    in_order_recursive(result, right[ind]);
+    return;
+  }
+
+  void pre_order_recursive(vector<int> &result, int ind)
+  {
+    if (ind == -1) return;
+    result.push_back(key[ind]);
+    pre_order_recursive(result, left[ind]);
+    pre_order_recursive(result, right[ind]);
+    return;
+  }
+
+  void post_order_recursive(vector<int> &result, int ind)
+  {
+    if (ind == -1) return;
+    post_order_recursive(result, left[ind]);
+    post_order_recursive(result, right[ind]);
+    result.push_back(key[ind]);
+    return;
+  }
 
   vector <int> in_order() {
     vector<int> result;
     // Finish the implementation
     // You may need to add a new recursive method to do that
 
+    in_order_recursive(result, 0);
     return result;
   }
 
@@ -41,6 +68,7 @@ public:
     // Finish the implementation
     // You may need to add a new recursive method to do that
     
+    pre_order_recursive(result, 0);
     return result;
   }
 
@@ -49,6 +77,7 @@ public:
     // Finish the implementation
     // You may need to add a new recursive method to do that
     
+    post_order_recursive(result, 0);
     return result;
   }
 };
